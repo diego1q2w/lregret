@@ -7,16 +7,30 @@ class LinearRegression:
         if type(x) == pd.Series:
             x = pd.DataFrame({'X': x.values})
 
-        self.w = np.array([])
+        x['bias'] = 1
+        self.samples, self.features = x.shape
+        self.w = np.zeros(self.features)
         self.x = x
         self.y = y
 
+    def fit_gradient_descent(self):
+        learning_rate = 0.01
+        old_cost = 1000000
+        for _ in range(90):
+            y_pred = self.prediction()
+            residuals = y_pred - self.y
+            gradient_vector = np.dot(self.x.T, residuals)
+            self.w -= (learning_rate / self.samples) * gradient_vector
+
+            cost = np.sum((residuals ** 2)) / (2 * self.samples)
+            if np.abs(old_cost - cost) < 0.001:
+                break
+            old_cost = cost
+
     def fit(self) -> None:
-        self.x['ones'] = 1
         self.w = np.linalg.solve(self.x.T.dot(self.x), self.x.T.dot(self.y))
 
     def fit_l2(self, l2: float):
-        self.x['ones'] = 1
         self.w = np.linalg.solve(l2*np.eye(len(self.x.columns)) + self.x.T.dot(self.x), self.x.T.dot(self.y))
 
     def prediction(self) -> pd.Series:
