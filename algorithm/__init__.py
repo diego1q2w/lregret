@@ -15,6 +15,10 @@ class LinearRegression:
         self.x['ones'] = 1
         self.w = np.linalg.solve(self.x.T.dot(self.x), self.x.T.dot(self.y))
 
+    def fit_l2(self, l2: float):
+        self.x['ones'] = 1
+        self.w = np.linalg.solve(l2*np.eye(len(self.x.columns)) + self.x.T.dot(self.x), self.x.T.dot(self.y))
+
     def prediction(self) -> pd.Series:
         return self.x.dot(self.w)
 
