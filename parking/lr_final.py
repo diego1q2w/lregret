@@ -11,3 +11,26 @@
 # Capacity: Car park capacity
 # Occupancy: Car park occupancy rate
 # LastUpdated: Date and Time of the measure
+from datetime import datetime
+import time
+import matplotlib.pyplot as plt
+
+import pandas as pd
+from algorithm import LinearRegression
+
+df = pd.read_csv('dataset.csv')
+df['LastUpdated'] = df['LastUpdated']\
+    .apply(lambda x: time.mktime(datetime.strptime(x, '%Y-%m-%d %H:%M:%S').timetuple()))
+
+Y = df['Occupancy']
+X = df[['Capacity', 'LastUpdated']]
+
+lr = LinearRegression(X, Y)
+lr.fit()
+
+plt.plot(Y, label='target')
+plt.plot(lr.prediction(), label='prediction')
+plt.legend()
+plt.show()
+print("the r-squared is: {}".format(lr.r2()))
+
