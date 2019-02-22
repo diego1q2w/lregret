@@ -14,15 +14,15 @@ class LinearRegression:
         self.y = y
 
     def fit_gradient_descent(self):
-        learning_rate = 0.01
+        learning_rate = 0.000001
         old_cost = 1000000
-        for _ in range(90):
+        while True:
             y_pred = self.prediction()
             residuals = y_pred - self.y
-            gradient_vector = np.dot(self.x.T, residuals)
+            gradient_vector = self.x.T.dot(residuals)
             self.w -= (learning_rate / self.samples) * gradient_vector
 
-            cost = np.sum((residuals ** 2)) / (2 * self.samples)
+            cost = residuals.dot(residuals) / (2 * self.samples)
             if np.abs(old_cost - cost) < 0.001:
                 break
             old_cost = cost

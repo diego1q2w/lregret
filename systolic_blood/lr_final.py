@@ -21,7 +21,7 @@ plt.scatter(X['X3'], Y)
 plt.show()
 
 lr = LinearRegression(X, Y)
-lr.fit()
+lr.fit_gradient_descent()
 Yhat = lr.prediction()
 
 plt.plot(Y, label='r')
