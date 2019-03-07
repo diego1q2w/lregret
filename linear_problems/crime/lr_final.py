@@ -1,5 +1,5 @@
 # Data set can be found in:
-# https://archive.ics.uci.edu/ml/datasets/Computer+Hardware
+# https://archive.ics.uci.edu/ml/datasets/Communities+and+Crime
 # Communities and Crime Data Set
 # Data Set Information:
 #
