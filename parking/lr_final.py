@@ -16,7 +16,7 @@ import time
 import matplotlib.pyplot as plt
 
 import pandas as pd
-from algorithm import LinearRegression
+from regresion.linear.linear import LinearRegression
 
 df = pd.read_csv('dataset.csv')
 df['LastUpdated'] = df['LastUpdated']\

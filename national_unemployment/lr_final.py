@@ -10,8 +10,8 @@ import operator
 
 import pandas as pd
 import matplotlib.pyplot as plt
-from algorithm import LinearRegression
-from algorithm.feature import PolFeatures
+from regresion.linear.linear import LinearRegression
+from regresion.linear.feature import PolFeatures
 
 df = pd.read_excel('dataset.xls')
 

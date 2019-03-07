@@ -9,7 +9,7 @@
 
 import pandas as pd
 import matplotlib.pyplot as plt
-from algorithm import LinearRegression
+from regresion.linear.linear import LinearRegression
 
 df = pd.read_excel('dataset.xls')
 
