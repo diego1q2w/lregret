@@ -5,32 +5,30 @@ from regresion.linear.linear import LinearRegression
 
 
 class LinearProblem:
-    regression = LinearRegression
-
-    def __init__(self, samples: pd.DataFrame, target: pd.Series):
+    def __init__(self, samples: pd.DataFrame, target: pd.Series, regression: LinearRegression) -> None:
         self.samples = samples
         self.target = target
+        self.regression = regression
         self.plot_dataset()
+        self.regression.set_data(self.samples, self.target)
 
-    def plot_dataset(self):
+    def plot_dataset(self) -> None:
         for feature in self.samples.columns:
             plt.scatter(self.samples[feature], self.target)
-            plt.title("{} field vs {} in {} Data".format(feature, self.target.name, self.dataset_title()))
+            plt.title("{} Data".format(self.dataset_title()))
+            plt.xlabel(feature, fontsize=18)
+            plt.ylabel(self.target.name, fontsize=16)
             plt.show()
 
     def fit(self) -> None:
         """ Trains the model using gradient descent
         since it is applicable to every dataset is a required method """
-
-        self.regression = LinearRegression(self.samples, self.target)
         self.regression.fit()
         self.print_result("Gradient Decedent")
 
     def fit_l2(self, l2: float) -> None:
         """ Trains the model using L2 regularisation
          since it is applicable to every dataset is a required method"""
-
-        self.regression = LinearRegression(self.samples, self.target)
         self.regression.fit_l2(l2)
         self.print_result("L2 Regularisation")
 
@@ -42,7 +40,6 @@ class LinearProblem:
 
          Since we are solving the equation instead of using gradient descent we DO NOT have a costs chart
         """
-        self.regression = LinearRegression(self.samples, self.target)
         self.regression.fit_by_solving()
         self.print_result("Solving the Weights")
 

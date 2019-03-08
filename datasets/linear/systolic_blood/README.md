@@ -14,7 +14,8 @@ Each row has three values `(X1, X2, X3)`.
 ### Usage
 
 ```python
-s = SystolicBlood()
+lr = LinearRegression()
+s = SystolicBlood(lr)
 s.fit()
 ```
 ### Expected result
