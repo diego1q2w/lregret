@@ -51,7 +51,8 @@ class LinearProblem:
     def fit_l1(self, l1: float) -> None:
         """ Trains the model using L1 regularisation
          since it is applicable to every dataset is a required method"""
-        pass
+        self.regression.fit_l1(l1)
+        self.print_result("L1 Regularisation")
 
     def fit_polynomial(self, pol_features: PolFeatures) -> None:
         """ Trains the model using a polynomial regression

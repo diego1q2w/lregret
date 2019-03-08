@@ -59,6 +59,15 @@ class LinearRegression:
 
         self._gradient_descent(func)
 
+    def fit_l1(self, l1: float) -> None:
+        self.weight = np.zeros(self.features_size)
+        self.costs = np.array([])
+
+        def func(residuals: pd.Series) -> pd.Series:
+            return self.samples.T.dot(residuals) + l1 * np.sign(self.weight)
+
+        self._gradient_descent(func)
+
     def fit_by_solving(self) -> None:
         self.costs = np.array([])
         self.weight = np.linalg.solve(self.samples.T.dot(self.samples), self.samples.T.dot(self.target))
