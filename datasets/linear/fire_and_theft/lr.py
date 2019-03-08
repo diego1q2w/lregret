@@ -15,7 +15,7 @@ class FireAndTheftProblem(LinearProblem):
         return 'Fire and Theft in Chicago'
 
 
-lr = LinearRegression()
-s = FireAndTheftProblem(lr)
-p_features = PolFeatures(deg=4)
-s.fit_polynomial(p_features)
+# lr = LinearRegression()
+# s = FireAndTheftProblem(lr)
+# p_features = PolFeatures(deg=4)
+# s.fit_polynomial(p_features)

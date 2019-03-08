@@ -15,7 +15,7 @@ class UnemploymentProblem(LinearProblem):
         return 'National Unemployment'
 
 
-lr = LinearRegression()
-s = UnemploymentProblem(lr)
-p_features = PolFeatures(deg=4)
-s.fit_polynomial(p_features)
+# lr = LinearRegression()
+# s = UnemploymentProblem(lr)
+# p_features = PolFeatures(deg=4)
+# s.fit_polynomial(p_features)
