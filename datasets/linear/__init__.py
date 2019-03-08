@@ -67,7 +67,7 @@ class LinearProblem:
             plt.plot(self.regression.costs, label='Cost')
             plt.title("Training cost")
             plt.show()
-            print('----------------------------\n')
+        print('----------------------------\n')
 
     def dataset_title(self) -> str:
         raise NotImplementedError
