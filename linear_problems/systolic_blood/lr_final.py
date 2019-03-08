@@ -29,8 +29,8 @@ class SystolicBlood(LinearProblem):
         plt.show()
 
     def print_result(self, fit_type: str):
-        print("--- Result ---")
-        print("Weights: ", self.regression.weight)
+        print("--- Result for {} ---".format(fit_type))
+        print("Weights: \n", self.regression.weight)
         print("R-squared: ", self.regression.r2())
 
         plt.plot(self.target, label='Target', c='r')
@@ -52,9 +52,5 @@ class SystolicBlood(LinearProblem):
 
     def fit(self):
         self.regression = LinearRegression(self.samples, self.target)
-        self.regression.fit_gradient_descent()
+        self.regression.fit()
         self.print_result("Gradient Decedent")
-
-
-s = SystolicBlood()
-s.fit()

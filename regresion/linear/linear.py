@@ -1,10 +1,11 @@
 import numpy as np
 import pandas as pd
+from typing import Callable
 
 
 class LinearRegression:
 
-    def __init__(self, x: pd.DataFrame, y: pd.Series):
+    def __init__(self, x: pd.DataFrame, y: pd.Series) -> None:
         if type(x) == pd.Series:
             x = pd.DataFrame({'X': x.values})
 
@@ -15,14 +16,13 @@ class LinearRegression:
         self.samples = x
         self.target = y
 
-    def fit_gradient_descent(self):
+    def _gradient_descent(self, func: Callable[[pd.Series], pd.Series]) -> None:
         learning_rate = 0.000001
         old_cost = 1000000
         while True:
-            y_pred = self.prediction()
-            residuals = y_pred - self.target
-            gradient_vector = self.samples.T.dot(residuals)
-            self.weight -= (learning_rate / self.samples_size) * gradient_vector
+            residuals = self.prediction() - self.target
+            gradient_vector = func(residuals)
+            self.weight -= (learning_rate / self.samples_size) * gradient_vector.astype('float')
 
             cost = residuals.dot(residuals) / (2 * self.samples_size)
             self.costs = np.append(self.costs, cost)
@@ -31,10 +31,16 @@ class LinearRegression:
             old_cost = cost
 
     def fit(self) -> None:
-        self.weight = np.linalg.solve(self.samples.T.dot(self.samples), self.samples.T.dot(self.target))
+        def func(residuals: pd.Series) -> pd.Series:
+            return self.samples.T.dot(residuals)
 
-    def fit_l2(self, l2: float):
-        self.weight = np.linalg.solve(l2*np.eye(len(self.samples.columns)) + self.samples.T.dot(self.samples), self.samples.T.dot(self.target))
+        self._gradient_descent(func)
+
+    def fit_l2(self, l2: float) -> None:
+        def func(residuals: pd.Series) -> pd.Series:
+            return self.samples.T.dot(residuals) + l2 * self.weight.astype('float')
+
+        self._gradient_descent(func)
 
     def prediction(self) -> pd.Series:
         return self.samples.dot(self.weight)
