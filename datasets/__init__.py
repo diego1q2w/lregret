@@ -1,0 +1,2 @@
+class InfinitError(Exception):
+    pass

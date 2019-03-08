@@ -1,8 +1,10 @@
 # Systolic Blood Pressure
+`Dificulty  level: easy`
 
 Is it possible to find any correlation between age, weight and the systolic blood pressure (SBD)?
 
 That's the question we are looking forward to answer with the following [dataset](http://college.cengage.com/mathematics/brase/understandable_statistics/7e/students/datasets/mlr/frames/frame.html).
+
 Each row has three values `(X1, X2, X3)`.
 
 * `X1` Systolic blood pressure
@@ -20,7 +22,8 @@ s.fit()
 It might be slightly different for different values and different iterations
 ```
 --- Result for Gradient Decedent ---
-Weights:  X2      0.224582
+Weights:  
+X2      0.224582
 X3      0.696740
 bias    0.003557
 dtype: float64

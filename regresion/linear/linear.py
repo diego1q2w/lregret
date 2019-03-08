@@ -2,6 +2,8 @@ import numpy as np
 import pandas as pd
 from typing import Callable
 
+from datasets import InfinitError
+
 
 class LinearRegression:
 
@@ -26,8 +28,13 @@ class LinearRegression:
 
             cost = residuals.dot(residuals) / (2 * self.samples_size)
             self.costs = np.append(self.costs, cost)
+
+            if np.math.isinf(cost):
+                raise InfinitError("Gradient descent reach a cost of inf")
+
             if np.abs(old_cost - cost) < 0.001:
                 break
+
             old_cost = cost
 
     def fit(self) -> None:
@@ -41,6 +48,9 @@ class LinearRegression:
             return self.samples.T.dot(residuals) + l2 * self.weight.astype('float')
 
         self._gradient_descent(func)
+
+    def fit_by_solving(self) -> None:
+        self.weight = np.linalg.solve(self.samples.T.dot(self.samples), self.samples.T.dot(self.target))
 
     def prediction(self) -> pd.Series:
         return self.samples.dot(self.weight)
