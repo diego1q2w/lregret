@@ -17,11 +17,7 @@ class LinearRegression:
         self.learning_rate = learning_rate
 
     def set_data(self, samples: pd.DataFrame, target: pd.Series) -> None:
-        if type(samples) == pd.Series:
-            self.samples = pd.DataFrame({'X': samples.values})
-        else:
-            self.samples = samples
-
+        self.samples = samples
         self.samples['bias'] = 1
 
         self.samples_size, self.features_size = self.samples.shape

@@ -15,7 +15,7 @@ Each row has three values `(X1, X2, X3)`.
 
 ```python
 lr = LinearRegression()
-s = SystolicBlood(lr)
+s = SystolicBloodProblem(lr)
 s.fit()
 ```
 ### Expected result

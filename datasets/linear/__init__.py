@@ -1,12 +1,17 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
+from regresion.linear.feature import PolFeatures
 from regresion.linear.linear import LinearRegression
 
 
 class LinearProblem:
     def __init__(self, samples: pd.DataFrame, target: pd.Series, regression: LinearRegression) -> None:
-        self.samples = samples
+        if type(samples) == pd.Series:
+            self.samples = pd.DataFrame({'X': samples.values})
+        else:
+            self.samples = samples
+
         self.target = target
         self.regression = regression
         self.plot_dataset()
@@ -15,7 +20,7 @@ class LinearProblem:
     def plot_dataset(self) -> None:
         for feature in self.samples.columns:
             plt.scatter(self.samples[feature], self.target)
-            plt.title("{} Data".format(self.dataset_title()))
+            plt.title("{} Data Set".format(self.dataset_title()))
             plt.xlabel(feature, fontsize=18)
             plt.ylabel(self.target.name, fontsize=16)
             plt.show()
@@ -48,10 +53,14 @@ class LinearProblem:
          since it is applicable to every dataset is a required method"""
         pass
 
-    def fit_polynomial(self, degree: int) -> None:
+    def fit_polynomial(self, pol_features: PolFeatures) -> None:
         """ Trains the model using a polynomial regression
-        since this can be applicable for datasets with one feature it is an optional method"""
-        pass
+        since this can be applicable for datasets with one feature it will take the first """
+        feature = self.samples.columns[0]
+        pol_samples = pol_features.generate_pol(self.samples[feature])
+        self.regression.set_data(pol_samples, self.target)
+        self.regression.fit_by_solving()
+        self.print_result("Solving the Weights")
 
     def print_result(self,  fit_type: str) -> None:
         print("--- Result for {} Data using {} ---".format(self.dataset_title(), fit_type))

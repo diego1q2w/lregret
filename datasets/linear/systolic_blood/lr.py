@@ -4,7 +4,7 @@ from datasets.linear import LinearProblem
 from regresion.linear.linear import LinearRegression
 
 
-class SystolicBlood(LinearProblem):
+class SystolicBloodProblem(LinearProblem):
 
     def __init__(self, regression: LinearRegression) -> None:
         df = pd.read_excel('dataset.xls')
