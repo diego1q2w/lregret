@@ -1,8 +1,13 @@
 import pandas as pd
-import matplotlib.pyplot as plt
+
 
 from regresion.linear.feature import PolFeatures
 from regresion.linear.linear import LinearRegression
+
+import matplotlib
+matplotlib.use('agg')
+
+from matplotlib import pyplot as plt
 
 
 class LinearProblem:
