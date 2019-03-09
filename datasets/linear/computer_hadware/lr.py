@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 
 from datasets.linear import LinearProblem
@@ -16,7 +18,8 @@ class ComputerHardwareProblem(LinearProblem):
         pass
 
     def __init__(self, regression: LinearRegression) -> None:
-        df = pd.read_csv('dataset.csv')
+        file_name = os.path.join(os.path.dirname(__file__), 'dataset.csv')
+        df = pd.read_csv(file_name)
 
         # one hot encoding
         one_hot_vendor = pd.get_dummies(df['vendorName'])

@@ -36,7 +36,7 @@ class LinearRegression:
             if np.math.isinf(cost):
                 raise InfinitError("Gradient descent reach a cost of inf")
 
-            if np.abs(old_cost - cost) < 0.001:
+            if np.abs(old_cost - cost) < 0.01:
                 break
 
             old_cost = cost

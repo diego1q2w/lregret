@@ -1,3 +1,4 @@
+import os
 from datetime import datetime
 import time
 
@@ -13,7 +14,8 @@ class ParkingProblem(LinearProblem):
         return "Parking"
 
     def __init__(self, regression: LinearRegression) -> None:
-        df = pd.read_csv('dataset.csv')
+        file_name = os.path.join(os.path.dirname(__file__), 'dataset.csv')
+        df = pd.read_csv(file_name)
 
         def format_date(raw_date: str) -> float:
             timestamp = time.mktime(datetime.strptime(raw_date, '%Y-%m-%d %H:%M:%S').timetuple())
