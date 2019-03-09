@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+set -e
+
+IMG_NAME=lregret:3.7
+CONTAINER_NAME=lregret_1
+
+docker build -t $IMG_NAME .
+if [[ $(docker ps -aq -f name=$CONTAINER_NAME) ]]; then
+  docker rm $CONTAINER_NAME
+fi
+
+docker run --env SAVE_INTO_FILE='1' -it --name $CONTAINER_NAME $IMG_NAME python main.py $@

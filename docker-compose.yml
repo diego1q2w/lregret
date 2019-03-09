@@ -1,0 +1,11 @@
+version: "3.4"
+
+services:
+  app:
+    image: diego1q2w/python-3.7-local-scientific
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+    environment:
+      - SAVE_INTO_FILE=1
+    command: ["python", "main.py"]

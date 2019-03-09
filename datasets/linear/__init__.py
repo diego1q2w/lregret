@@ -1,11 +1,10 @@
+import os
+
 import pandas as pd
 
 
 from regresion.linear.feature import PolFeatures
 from regresion.linear.linear import LinearRegression
-
-import matplotlib
-matplotlib.use('agg')
 
 from matplotlib import pyplot as plt
 
@@ -24,10 +23,22 @@ class LinearProblem:
 
     def plot_dataset(self) -> None:
         for feature in self.samples.columns:
+            fig = plt.figure()
+
             plt.scatter(self.samples[feature], self.target)
             plt.title("{} Data Set".format(self.dataset_title()))
             plt.xlabel(feature, fontsize=18)
             plt.ylabel(self.target.name, fontsize=16)
+
+            file_name = 'dataset_{}_vs_{}.png'.format(feature, self.target.name)
+            self.show_plot(file_name, fig)
+
+    def show_plot(self, file_name: str, fig: plt.Figure):
+        is_docker = os.getenv('SAVE_INTO_FILE', False)
+        if is_docker:
+            file_path = os.path.join(os.path.dirname(__file__), '..', '..', 'tmp_figures', file_name)
+            fig.savefig(file_path, dpi=fig.dpi)
+        else:
             plt.show()
 
     def fit(self) -> None:
@@ -69,19 +80,23 @@ class LinearProblem:
         self.print_result("Solving the Weights")
 
     def print_result(self,  fit_type: str) -> None:
-        print("--- Result for {} Data using {} ---".format(self.dataset_title(), fit_type))
+        print("\n--- Result for {} Data using {} ---".format(self.dataset_title(), fit_type))
         print("Weights: \n", self.regression.weight)
         print("R-squared: ", self.regression.r2())
 
+        fig = plt.figure()
         plt.plot(self.target, label='Target')
         plt.plot(self.regression.prediction(), label='Prediction')
         plt.legend()
-        plt.show()
+        file_name = 'target_vs_prediction.png'
+        self.show_plot(file_name, fig)
 
         if len(self.regression.costs) > 0:
+            fig = plt.figure()
             plt.plot(self.regression.costs, label='Cost')
             plt.title("Training cost")
-            plt.show()
+            file_name = 'cost.png'
+            self.show_plot(file_name, fig)
         print('----------------------------\n')
 
     def dataset_title(self) -> str:

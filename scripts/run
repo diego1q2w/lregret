@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 set -e
 
-IMG_NAME=lregret:3.7
-CONTAINER_NAME=lregret_1
-
-docker build -t $IMG_NAME .
-if [[ $(docker ps -aq -f name=$CONTAINER_NAME) ]]; then
-  docker rm $CONTAINER_NAME
+IMG_DIR=tmp_figures
+if [ $(ls -1 ./$IMG_DIR/*.png 2>/dev/null | wc -l) != 0 ]; then
+    echo "Deleting files"
+    rm ./$IMG_DIR/*.png
 fi
-docker run -it --name $CONTAINER_NAME $IMG_NAME python main.py $@
+
+docker-compose run app python main.py $@
