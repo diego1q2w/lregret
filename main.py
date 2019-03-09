@@ -1,9 +1,5 @@
-import os
 import argparse
 
-from typing import Dict
-
-from datasets.linear import LinearProblem
 from datasets.linear.systolic_blood.lr import SystolicBloodProblem
 from datasets.linear.parking.lr import ParkingProblem
 from datasets.linear.national_unemployment.lr import UnemploymentProblem
