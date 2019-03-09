@@ -37,7 +37,7 @@ s.fit_l1(0.2)
 ```
 ### Expected result
 
-It might be slightly different for different values and different iterations
+It might differ between values and iterations
 ```
 --- Result for Computer Hardware Data using L1 Regularisation ---
 Weights: 

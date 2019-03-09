@@ -39,26 +39,32 @@ def get_arguments() -> argparse.Namespace:
     return parser.parse_args()
 
 
-if __name__ == '__main__':
-    args = get_arguments()
+def call_operation(args: argparse.Namespace) -> bool:
     lr = LinearRegression(learning_rate=args.lrate)
     problem = problems[args.dataset](lr)
 
     operation = getattr(problem, args.operation)
 
-    if callable(operation):
-        def arguments(x):
-            return {
-                'fit_l1': dict(l1=args.l1),
-                'fit_l2': dict(l2=args.l2),
-                'fit_polynomial': dict(pol_features=PolFeatures(args.degree)),
-                'b': 2
-            }.get(x, None)
+    def arguments(x):
+        return {
+            'fit_l1': dict(l1=args.l1),
+            'fit_l2': dict(l2=args.l2),
+            'fit_polynomial': dict(pol_features=PolFeatures(args.degree)),
+        }.get(x, None)
 
-        o_args = arguments(args.operation)
+    o_args = arguments(args.operation)
+
+    if callable(operation):
         if o_args:
             operation(o_args)
         else:
             operation()
-    else:
-        raise Exception("Not valid operation")
+
+    return callable(operation)
+
+
+if __name__ == '__main__':
+    u_args = get_arguments()
+
+    if not call_operation(u_args):
+        raise Exception("Invalid operation")

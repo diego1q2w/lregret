@@ -26,7 +26,7 @@ s.fit_polynomial(p_features)
 ```
 ### Expected result
 
-It might be slightly different for different values and different iterations
+It might differ between values and iterations
 ```
 --- Result for National Unemployment Data using Solving the Weights ---
 Weights: 
