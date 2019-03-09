@@ -1,7 +1,7 @@
 # National Unemployment Male Vs. Female
 `Dificulty  level: easy`
 
-Does the women unemployment is related to the men's?
+Is women's unemployment related to the men's?
 
 That's the question we are looking forward to answer with the following [data set](http://college.cengage.com/mathematics/brase/understandable_statistics/7e/students/datasets/slr/frames/frame.html).
 

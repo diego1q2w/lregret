@@ -1,7 +1,7 @@
 # Fire and Theft in Chicago
 `Dificulty  level: easy`
 
-Does the fires and theft are related?
+Are the fires and theft related?
 
 That's the question we are looking forward to answer with the following [data set](http://college.cengage.com/mathematics/brase/understandable_statistics/7e/students/datasets/slr/frames/frame.html).
 
