@@ -9,4 +9,4 @@ if [[ $(docker ps -aq -f name=$CONTAINER_NAME) ]]; then
   docker rm $CONTAINER_NAME
 fi
 
-docker run --env SAVE_INTO_FILE='1' -it --name $CONTAINER_NAME $IMG_NAME python main.py $@
+docker run --env SAVE_INTO_FILE=1 -it --name $CONTAINER_NAME $IMG_NAME python main.py $@

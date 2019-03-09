@@ -1,5 +1,7 @@
 import argparse
 
+from typing import Dict
+
 from datasets.linear.systolic_blood.lr import SystolicBloodProblem
 from datasets.linear.parking.lr import ParkingProblem
 from datasets.linear.national_unemployment.lr import UnemploymentProblem
@@ -45,20 +47,17 @@ def call_operation(args: argparse.Namespace) -> bool:
 
     operation = getattr(problem, args.operation)
 
-    def arguments(x):
+    def with_arguments(x) -> Dict:
         return {
             'fit_l1': dict(l1=args.l1),
             'fit_l2': dict(l2=args.l2),
             'fit_polynomial': dict(pol_features=PolFeatures(args.degree)),
-        }.get(x, None)
+        }.get(x, {})
 
-    o_args = arguments(args.operation)
+    o_args = with_arguments(args.operation)
 
     if callable(operation):
-        if o_args:
-            operation(o_args)
-        else:
-            operation()
+        operation(**o_args)
 
     return callable(operation)
 
