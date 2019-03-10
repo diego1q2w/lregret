@@ -33,9 +33,10 @@ Each operation impact the training in different ways by adding more features or 
 * `fit` The traditional training using gradient descend you might want to set `learning_rate` parameter to adjust it to the data-set
 * `fit_l2` Similar to `fit` but adding L2 regularisation a common technique to avoid over-fitting by reducing the weights to values close to zero, don't forget to set the `l2` constant
 * `fit_l1` Similar to `fit` but adding L1 regularisation a common technique to avoid over-fitting by muting non-relevant weights, don't forget to set the `l1` constant
-* `fit_polynomial` Similar to `fit` but engineering polynomial features in order to learn from non-linear correlations, don't forget to play with the `degree` constant
 * `fit_solving` Linear Regression is one of the few or perhaps the only algorithm that has a solution so it's possible to solve the weights using only the input and the target instead of using gradient descend
 
+For any operation you can use Polinomial Regression, there are different ways to implement it by using the api with the parameter `--degree` (more details [here](https://github.com/diego1q2w/lregret#3--use-a-handy-script)) or call it directly with the class `PolFeatures` 
+see an example [here](https://github.com/diego1q2w/lregret/tree/master/datasets/linear/national_unemployment#usage), for more information please check the `How to use it` section.
 ### Logistic Regression
 TODO: implement algorithms
 
@@ -58,7 +59,7 @@ For starting you can type `python main.py -h` to get some help about which comma
 
 * `python main.py --dataset systolic_blood --operation fit_l2 --l2 100`
 * `python main.py --dataset systolic_blood --operation fit`
-* `python main.py --dataset systolic_blood --operation fit_polynomial --degree 9`
+* `python main.py --dataset systolic_blood --operation fit --degree 9`
 
 Just a small reminder for this option, please make sure you have the packages required by `requirements.txt` installed
 
@@ -70,7 +71,7 @@ For start you can just run `./script/run -h` to get some help about which comman
 
 * `./script/run --dataset systolic_blood --operation fit_l2 --l2 100`
 * `./script/run --dataset systolic_blood --operation fit`
-* `./script/run --dataset systolic_blood --operation fit_polynomial --degree 9`
+* `./script/run --dataset systolic_blood --operation fit --degree 9`
 
 Just a small note about this option, since getting UI features work within docker containers might have a huge impact in the docker image size the graph results are stored in the folder `tmp_figures`,
 each time you run this script previous images generated will be deleted.

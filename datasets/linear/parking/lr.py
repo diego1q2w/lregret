@@ -5,6 +5,7 @@ import time
 import pandas as pd
 
 from datasets.linear import LinearProblem
+from regresion.linear.feature import PolFeatures
 from regresion.linear.linear import LinearRegression
 
 
@@ -13,7 +14,7 @@ class ParkingProblem(LinearProblem):
     def dataset_title(self) -> str:
         return "Parking"
 
-    def __init__(self, regression: LinearRegression) -> None:
+    def __init__(self, regression: LinearRegression, pol_features=PolFeatures(1)) -> None:
         file_name = os.path.join(os.path.dirname(__file__), 'dataset.csv')
         df = pd.read_csv(file_name)
 
@@ -24,7 +25,7 @@ class ParkingProblem(LinearProblem):
 
         df['LastUpdated'] = df['LastUpdated'] \
             .apply(format_date)
-        super().__init__(df[['Capacity', 'LastUpdated']], df['Occupancy'], regression)
+        super().__init__(df[['Capacity', 'LastUpdated']], df['Occupancy'], regression, pol_features)
 
 
 # lr = LinearRegression()

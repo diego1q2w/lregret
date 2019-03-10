@@ -10,7 +10,11 @@ from matplotlib import pyplot as plt
 
 
 class LinearProblem:
-    def __init__(self, samples: pd.DataFrame, target: pd.Series, regression: LinearRegression) -> None:
+    def __init__(self,
+                 samples: pd.DataFrame,
+                 target: pd.Series,
+                 regression: LinearRegression,
+                 pol_features=PolFeatures(1)) -> None:
         if type(samples) == pd.Series:
             self.samples = pd.DataFrame({'X': samples.values})
         else:
@@ -18,7 +22,10 @@ class LinearProblem:
 
         self.target = target
         self.regression = regression
+        self.pol_features = pol_features
         self.plot_dataset()
+
+        self.samples = pol_features.generate_pol(self.samples)
         self.regression.set_data(self.samples, self.target)
 
     def plot_dataset(self) -> None:
@@ -69,15 +76,6 @@ class LinearProblem:
          since it is applicable to every dataset is a required method"""
         self.regression.fit_l1(l1)
         self.print_result("L1 Regularisation")
-
-    def fit_polynomial(self, pol_features: PolFeatures) -> None:
-        """ Trains the model using a polynomial regression
-        since this can be applicable for datasets with one feature it will take the first """
-        feature = self.samples.columns[0]
-        pol_samples = pol_features.generate_pol(self.samples[feature])
-        self.regression.set_data(pol_samples, self.target)
-        self.regression.fit_by_solving()
-        self.print_result("Solving the Weights")
 
     def print_result(self,  fit_type: str) -> None:
         print("\n--- Result for {} Data using {} ---".format(self.dataset_title(), fit_type))

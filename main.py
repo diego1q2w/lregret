@@ -43,7 +43,8 @@ def get_arguments() -> argparse.Namespace:
 
 def call_operation(args: argparse.Namespace) -> bool:
     lr = LinearRegression(learning_rate=args.lrate)
-    problem = problems[args.dataset](lr)
+    pf = PolFeatures(args.degree)
+    problem = problems[args.dataset](lr, pol_features=pf)
 
     operation = getattr(problem, args.operation)
 
@@ -51,7 +52,6 @@ def call_operation(args: argparse.Namespace) -> bool:
         return {
             'fit_l1': dict(l1=args.l1),
             'fit_l2': dict(l2=args.l2),
-            'fit_polynomial': dict(pol_features=PolFeatures(args.degree)),
         }.get(x, {})
 
     o_args = with_arguments(args.operation)

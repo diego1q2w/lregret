@@ -20,9 +20,9 @@ s.fit_solving()
 OR you can add feature degrees and see how you can adapt it with the target
 ```python
 lr = LinearRegression()
-s = UnemploymentProblem(lr)
 p_features = PolFeatures(deg=4)
-s.fit_polynomial(p_features)
+s = UnemploymentProblem(lr, pol_features=p_features)
+s.fit_solving()
 ```
 ### Expected result
 
