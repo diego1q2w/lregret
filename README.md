@@ -57,9 +57,9 @@ Going from dataset to dataset might be a little bit overwhelming, surely a small
 
 For starting you can type `python main.py -h` to get some help about which commands you have available but anyway here you have some examples:
 
-* `python main.py --dataset systolic_blood --operation fit_l2 --l2 100`
-* `python main.py --dataset systolic_blood --operation fit`
-* `python main.py --dataset systolic_blood --operation fit --degree 9`
+* `python main.py systolic_blood fit_l2 --l2 100`
+* `python main.py systolic_blood fit`
+* `python main.py systolic_blood fit --degree 9`
 
 Just a small reminder for this option, please make sure you have the packages required by `requirements.txt` installed
 
@@ -69,9 +69,9 @@ You are a modern developer and you just use `docker-compose` for everything don'
 
 For start you can just run `./script/run -h` to get some help about which commands you have available but anyway here you have some examples:
 
-* `./script/run --dataset systolic_blood --operation fit_l2 --l2 100`
-* `./script/run --dataset systolic_blood --operation fit`
-* `./script/run --dataset systolic_blood --operation fit --degree 9`
+* `./script/run systolic_blood fit_l2 --l2 100`
+* `./script/run systolic_blood fit`
+* `./script/run systolic_blood fit --degree 9`
 
 Just a small note about this option, since getting UI features work within docker containers might have a huge impact in the docker image size the graph results are stored in the folder `tmp_figures`,
 each time you run this script previous images generated will be deleted.

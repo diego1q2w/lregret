@@ -24,11 +24,9 @@ def get_arguments() -> argparse.Namespace:
     p_names = list(problems.keys())
 
     parser = argparse.ArgumentParser("lRegret")
-    parser.add_argument("--dataset", default=p_names[0],
-                        choices=p_names,
-                        help="The dataset to be used for training (default: %(default)s)")
+    parser.add_argument("dataset", choices=p_names, help="The dataset to be used for training (default: %(default)s)")
 
-    parser.add_argument("--operation", default='fit', type=str,
+    parser.add_argument("operation", default='fit', type=str,
                         help="the kind of training to be executed on the dataset (default: %(default)s)")
 
     parser.add_argument("--lrate", default=0.000001, type=float,
